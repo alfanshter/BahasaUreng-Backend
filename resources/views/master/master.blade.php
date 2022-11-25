@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
+  @notifyCss
+
 </head>
 
 <body>
@@ -37,6 +39,7 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
@@ -54,6 +57,8 @@
   <script src="{{asset('js/dashboard.js')}}"></script>
   <script src="{{asset('js/todolist.js')}}"></script>
   <!-- End custom js for this page -->
+  @notifyJs
+
 </body>
 
 </html>

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [KataController::class, 'index'])->middleware('auth');
-Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/authenticate', [UserController::class, 'authenticate']);
 Route::get('/register', [UserController::class, 'register']);
 Route::post('/register_proses', [UserController::class, 'register_proses']);
