@@ -4,59 +4,137 @@
 @section('konten')
 
 
-  <div class="content-wrapper">
-    <div class="page-header">
-      <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white me-2">
-          <i class="mdi mdi-home"></i>
-        </span> Dashboard
-      </h3>
-      <nav aria-label="breadcrumb">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
-            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="row">
-      <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-danger card-img-holder text-white">
-          <div class="card-body">
-            <img src="{{asset('images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-            <h4 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-            </h4>
-            <h2 class="mb-5">$ 15,0000</h2>
-            <h6 class="card-text">Increased by 60%</h6>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-info card-img-holder text-white">
-          <div class="card-body">
-            <img src="{{asset('images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-            <h4 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-            </h4>
-            <h2 class="mb-5">45,6334</h2>
-            <h6 class="card-text">Decreased by 10%</h6>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-success card-img-holder text-white">
-          <div class="card-body">
-            <img src="{{asset('images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-            <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
-            </h4>
-            <h2 class="mb-5">95,5741</h2>
-            <h6 class="card-text">Increased by 5%</h6>
-          </div>
-        </div>
-      </div>
-    </div>
- 
+@if (session()->has('success'))
+<div class="alert alert-success mt-2" role="alert">
+  {{session('success')}}
+</div>
+@endif
+
+<div class="content-wrapper">
+  <div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white me-2">
+        <i class="mdi mdi-home"></i>
+      </span> Dashboard
+    </h3>
+    <nav aria-label="breadcrumb">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+          <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <!-- content-wrapper ends -->
-  <!-- partial:partials/_footer.html -->
-  <!-- partial -->
+
+  <div class="page-header">
+    <h3 class="page-title"> Job Safety Analysis </h3>
+
+    <button type="button" data-bs-toggle="modal" data-bs-target="#tambahModal" data-bs-whatever="@mdo" class="btn btn-gradient-primary btn-icon-text btn-md">
+      <i class="mdi mdi-plus-box btn-icon-prepend"></i> Add </button>
+
+    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kata</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="/tambah_kata">
+              @csrf
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Kata:</label>
+                <input type="text" class="form-control" id="recipient-name" name="kata" required>
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Bahasa:</label>
+                <input class="form-control" id="message-text" name="bahasa" required></textarea>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+          </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered" id="job">
+      <thead>
+        <tr>
+          <th> No </th>
+          <th> Kata </th>
+          <th> Bahasa </th>
+          <th> Action </th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($data as $data)
+        <tr>
+          <td>{{ $loop->iteration }}</td>
+          <td>{{ $data->kata }}</td>
+          <td>{{ $data->bahasa }}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-gradient-info btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editmodal{{$data->id}}">
+                <i class="mdi mdi-pencil-box"></i>
+              </button>
+
+              <!-- Modal dari tombol edit -->
+              <div class="modal fade" id="editmodal{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Kata</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST" action="/update_kata">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$data->id}}">
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">Kata:</label>
+                          <input type="text" class="form-control" value="{{$data->kata}}" id="recipient-name" name="kata" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">Bahasa:</label>
+                          <input class="form-control" id="message-text" value="{{$data->bahasa}}" name="bahasa" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+
+              <form action="/hapus_kata" method="post">
+                @csrf
+                <input type="hidden" name="id" value="{{$data->id}}">
+                <button class="btn btn-gradient-danger btn-outline-secondary btn-sm " onclick="return confirm('Apakah anda menyetujui ?')">
+                  <i class="mdi mdi-delete"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- content-wrapper ends -->
+<!-- partial:partials/_footer.html -->
+<!-- partial -->
 @endsection

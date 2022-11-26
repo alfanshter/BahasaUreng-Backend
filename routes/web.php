@@ -19,3 +19,11 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 Route::post('/authenticate', [UserController::class, 'authenticate']);
 Route::get('/register', [UserController::class, 'register']);
 Route::post('/register_proses', [UserController::class, 'register_proses']);
+Route::get('/logout', [UserController::class, 'logout']);
+
+//Kata
+Route::get('/kata', [KataController::class, 'index']);
+Route::post('/tambah_kata', [KataController::class, 'tambah_kata']);
+Route::post('/hapus_kata', [KataController::class, 'hapus_kata']);
+Route::post('/update_kata', [KataController::class, 'update_kata']);
+
