@@ -15,7 +15,7 @@
     <h3 class="page-title">
       <span class="page-title-icon bg-gradient-primary text-white me-2">
         <i class="mdi mdi-home"></i>
-      </span> Kata
+      </span> Kalimat
     </h3>
     <nav aria-label="breadcrumb">
       <ul class="breadcrumb">
@@ -27,7 +27,7 @@
   </div>
 
   <div class="page-header">
-    <h3 class="page-title"> Job Safety Analysis </h3>
+    <h3 class="page-title"> Data Soal Kalimat </h3>
 
     <button type="button" data-bs-toggle="modal" data-bs-target="#tambahModal" data-bs-whatever="@mdo" class="btn btn-gradient-primary btn-icon-text btn-md">
       <i class="mdi mdi-plus-box btn-icon-prepend"></i> Add </button>
@@ -36,19 +36,19 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kata</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kalimat</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="/tambah_kata">
+            <form method="POST" action="/tambah_kalimat">
               @csrf
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Kata:</label>
-                <input type="text" class="form-control" id="recipient-name" name="kata" required>
+                <label for="recipient-name" class="col-form-label">Soal:</label>
+                <input type="text" class="form-control" id="recipient-name" name="soal" required>
               </div>
               <div class="mb-3">
-                <label for="message-text" class="col-form-label">Bahasa:</label>
-                <input class="form-control" id="message-text" name="bahasa" required></textarea>
+                <label for="message-text" class="col-form-label">jawaban:</label>
+                <input class="form-control" id="message-text" name="jawaban" required></textarea>
               </div>
           </div>
           <div class="modal-footer">
@@ -69,8 +69,8 @@
       <thead>
         <tr>
           <th> No </th>
-          <th> Kata </th>
-          <th> Bahasa </th>
+          <th> Soal </th>
+          <th> Jawaban </th>
           <th> Action </th>
         </tr>
       </thead>
@@ -78,8 +78,8 @@
         @foreach ($data as $data)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $data->kata }}</td>
-          <td>{{ $data->bahasa }}</td>
+          <td>{{ $data->soal }}</td>
+          <td>{{ $data->jawaban }}</td>
           <td>
             <div class="btn-group">
               <button class="btn btn-gradient-info btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editmodal{{$data->id}}">
@@ -91,20 +91,20 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Kata</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Kalimat</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="/update_kata">
+                      <form method="POST" action="/update_kalimat">
                         @csrf
                         <input type="hidden" name="id" value="{{$data->id}}">
                         <div class="mb-3">
-                          <label for="recipient-name" class="col-form-label">Kata:</label>
-                          <input type="text" class="form-control" value="{{$data->kata}}" id="recipient-name" name="kata" required>
+                          <label for="recipient-name" class="col-form-label">Soal:</label>
+                          <input type="text" class="form-control" value="{{$data->soal}}" id="recipient-name" name="soal" required>
                         </div>
                         <div class="mb-3">
-                          <label for="message-text" class="col-form-label">Bahasa:</label>
-                          <input class="form-control" id="message-text" value="{{$data->bahasa}}" name="bahasa" required></textarea>
+                          <label for="message-text" class="col-form-label">Jawaban:</label>
+                          <input class="form-control" id="message-text" value="{{$data->jawaban}}" name="jawaban" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -117,7 +117,7 @@
                 </div>
               </div>
 
-              <form action="/hapus_kata" method="post">
+              <form action="/hapus_kalimat" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{$data->id}}">
                 <button class="btn btn-gradient-danger btn-outline-secondary btn-sm " onclick="return confirm('Apakah anda menyetujui ?')">

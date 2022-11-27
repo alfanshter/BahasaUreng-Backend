@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\JawabanPilihanGandaController;
 use App\Http\Controllers\KataController;
+use App\Http\Controllers\PilihanGandaController;
+use App\Http\Controllers\SoalKalimatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +30,17 @@ Route::post('/tambah_kata', [KataController::class, 'tambah_kata']);
 Route::post('/hapus_kata', [KataController::class, 'hapus_kata']);
 Route::post('/update_kata', [KataController::class, 'update_kata']);
 
+//Pilihan Ganda
+Route::get('/pilihanganda', [PilihanGandaController::class, 'index']);
+Route::post('/tambah_soal_kata', [PilihanGandaController::class, 'tambah']);
+Route::post('/hapus_pilihanganda', [PilihanGandaController::class, 'delete']);
+Route::get('/jawaban_pilihanganda/{id?}', [PilihanGandaController::class, 'jawaban']);
+//Jawaban pilihan ganda
+Route::post('/tambah_jawaban_pilihanganda', [JawabanPilihanGandaController::class, 'tambah_jawaban_pilihanganda']);
+Route::post('/hapus_jawaban_pilihanganda', [JawabanPilihanGandaController::class, 'delete']);
+
+//Kalimat
+Route::get('/kalimat', [SoalKalimatController::class, 'index']);
+Route::post('/tambah_kalimat', [SoalKalimatController::class, 'tambah']);
+Route::post('/hapus_kalimat', [SoalKalimatController::class, 'delete']);
+Route::post('/update_kalimat', [SoalKalimatController::class, 'update']);
