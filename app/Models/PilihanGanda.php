@@ -10,4 +10,8 @@ class PilihanGanda extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function jawaban()
+    {
+        return $this->hasMany(JawabanPilihanGanda::class,'id_pilihanganda','id');
+    }
 }

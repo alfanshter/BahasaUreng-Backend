@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JawabanPilihanGandaController;
 use App\Http\Controllers\KataController;
+use App\Http\Controllers\KuisController;
 use App\Http\Controllers\PilihanGandaController;
 use App\Http\Controllers\SoalKalimatController;
 use App\Http\Controllers\UserController;
@@ -44,3 +45,4 @@ Route::get('/kalimat', [SoalKalimatController::class, 'index']);
 Route::post('/tambah_kalimat', [SoalKalimatController::class, 'tambah']);
 Route::post('/hapus_kalimat', [SoalKalimatController::class, 'delete']);
 Route::post('/update_kalimat', [SoalKalimatController::class, 'update']);
+
