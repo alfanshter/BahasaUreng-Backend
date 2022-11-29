@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KataKata;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class KataController extends Controller
 {
@@ -39,5 +40,29 @@ class KataController extends Controller
     {
         KataKata::where('id',$request->id)->delete();
         return redirect('/kata')->with('success', 'hapus data berhasil');
+    }
+
+    public function index_api()
+    {
+        $data = KataKata::all();
+        $response = [
+            'message' => 'success',
+            'sukses' => 1,
+            'data' => $data
+        ];
+
+        return response()->json($response, Response::HTTP_CREATED);
+    }
+
+    public function find(Request $request)
+    {
+        $kata = $request->input('kata');
+        $data = KataKata::where('kata', 'like', "%$kata%")->get();
+        $response = [
+            'message' => 'data sebagai berikut',
+            'status' => 1,
+            'data' => $data
+        ];
+        return response()->json($response, 200);
     }
 }

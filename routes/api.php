@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KataController;
 use App\Http\Controllers\KuisController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/kuis_kata', [KuisController::class, 'kuis_kata']);
 Route::post('/jawab_kuis_kata', [KuisController::class, 'jawab_kuis_kata']);
 
+//Kosa Kata
+
+Route::get('/kosakata', [KataController::class, 'index_api']);
+Route::get('/cari_kosakata', [KataController::class, 'find']);
