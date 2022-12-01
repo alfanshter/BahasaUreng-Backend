@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KataController;
 use App\Http\Controllers\KuisController;
+use App\Http\Controllers\KuisKalimatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ Route::get('/kuis_kata', [KuisController::class, 'kuis_kata']);
 Route::post('/jawab_kuis_kata', [KuisController::class, 'jawab_kuis_kata']);
 
 //Kosa Kata
-
 Route::get('/kosakata', [KataController::class, 'index_api']);
 Route::get('/cari_kosakata', [KataController::class, 'find']);
+
+//kalimat
+Route::get('/kuis_kalimat', [KuisKalimatController::class, 'kuis_kalimat']);
