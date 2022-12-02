@@ -31,3 +31,4 @@ Route::get('/cari_kosakata', [KataController::class, 'find']);
 
 //kalimat
 Route::get('/kuis_kalimat', [KuisKalimatController::class, 'kuis_kalimat']);
+Route::post('/jawab_kalimat', [KuisKalimatController::class, 'jawab_kalimat']);
